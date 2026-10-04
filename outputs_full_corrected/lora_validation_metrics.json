@@ -1,0 +1,29 @@
+{
+  "lora_multimodal": {
+    "n": 999,
+    "valid_responses": 998,
+    "invalid_responses": 1,
+    "accuracy_all": 0.8628628628628628,
+    "macro_f1_all": 0.8631773678388671,
+    "misogyny_precision": 0.8853503184713376,
+    "misogyny_recall": 0.834,
+    "cohen_kappa_valid_only": 0.7274549098196392,
+    "confusion_matrix_labels_minus1_0_1": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        445,
+        54
+      ],
+      [
+        1,
+        82,
+        417
+      ]
+    ]
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "zero_shot_multimodal": {
+    "n": 87,
+    "valid_responses": 87,
+    "invalid_responses": 0,
+    "accuracy_all": 0.8505747126436781,
+    "macro_f1_all": 0.8505747126436781,
+    "misogyny_precision": 0.8222222222222222,
+    "misogyny_recall": 0.8809523809523809,
+    "cohen_kappa_valid_only": 0.7015043547110056,
+    "confusion_matrix_labels_minus1_0_1": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        37,
+        8
+      ],
+      [
+        0,
+        5,
+        37
+      ]
+    ]
+  }
+}

@@ -1,0 +1,60 @@
+"""Read the provided splits; never invent labels or reshuffle the test set."""
+from pathlib import Path
+import hashlib
+import pandas as pd
+from PIL import Image
+
+
+def load_splits(config):
+    root = Path(config["data"]["root"]).resolve()
+    index = {}
+    for path in sorted(root.rglob("*")):
+        if path.is_file() and path.suffix.lower() in {".jpg", ".jpeg", ".png"} and not path.name.startswith("._"):
+            if path.name in index:
+                if path.read_bytes() == index[path.name].read_bytes():
+                    continue  # Identical copy; one image reference is enough.
+                raise ValueError(f"Different images share filename: {path.name}")
+            index[path.name] = path
+    splits, report = {}, {}
+    all_ids = set()
+    test_ids = set(pd.read_csv(root / config["data"]["test"], sep="\t")["file_name"])
+    hashes = {}
+    for split in ("train", "validation", "test"):
+        frame = pd.read_csv(root / config["data"][split], sep="\t", keep_default_na=False)
+        required = {"file_name", "label", "text"}
+        if not required.issubset(frame.columns):
+            raise ValueError(f"{split}: required columns are {sorted(required)}")
+        if frame.file_name.duplicated().any():
+            raise ValueError(f"Duplicate IDs in {split}")
+        original_rows = len(frame)
+        removed = 0
+        if split != "test":
+            overlap = frame.file_name.isin(test_ids)
+            removed = int(overlap.sum())
+            frame = frame.loc[~overlap].copy()
+        if all_ids.intersection(frame.file_name):
+            raise ValueError(f"Overlapping metadata IDs in {split}")
+        all_ids.update(frame.file_name)
+        frame["label"] = pd.to_numeric(frame.label, errors="raise")
+        if not frame.label.isin([0, 1]).all():
+            raise ValueError(f"Invalid binary labels in {split}")
+        missing = ~frame.file_name.isin(index)
+        if missing.any() and config["data"]["missing_images"] == "error":
+            raise FileNotFoundError(f"{split}: {int(missing.sum())} images missing")
+        report[split] = {"metadata_rows": original_rows, "removed_test_overlap": removed, "missing_images": int(missing.sum())}
+        frame = frame.loc[~missing].copy().reset_index(drop=True)
+        if frame.empty:
+            raise ValueError(f"No available images in {split}")
+        frame["image_path"] = frame.file_name.map(lambda name: str(index[name]))
+        for row in frame.itertuples():
+            path = Path(row.image_path)
+            with Image.open(path) as image:
+                image.verify()
+            digest = hashlib.sha256(path.read_bytes()).hexdigest()
+            if digest in hashes and hashes[digest][0] != split:
+                raise ValueError(f"Exact image leakage: {hashes[digest]} and {(split, row.file_name)}")
+            hashes[digest] = (split, row.file_name)
+        report[split]["available_rows"] = len(frame)
+        report[split]["class_counts"] = {str(k): int(v) for k, v in frame.label.value_counts().items()}
+        splits[split] = frame
+    return splits, report

@@ -1,0 +1,56 @@
+{
+  "majority": {
+    "n": 87,
+    "valid_responses": 87,
+    "invalid_responses": 0,
+    "accuracy_all": 0.5172413793103449,
+    "macro_f1_all": 0.3409090909090909,
+    "misogyny_precision": 0.0,
+    "misogyny_recall": 0.0,
+    "cohen_kappa_valid_only": 0.0,
+    "confusion_matrix_labels_minus1_0_1": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        45,
+        0
+      ],
+      [
+        0,
+        42,
+        0
+      ]
+    ]
+  },
+  "tfidf_lr": {
+    "n": 87,
+    "valid_responses": 87,
+    "invalid_responses": 0,
+    "accuracy_all": 0.735632183908046,
+    "macro_f1_all": 0.7350721567589038,
+    "misogyny_precision": 0.7317073170731707,
+    "misogyny_recall": 0.7142857142857143,
+    "cohen_kappa_valid_only": 0.47021445591739475,
+    "confusion_matrix_labels_minus1_0_1": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        34,
+        11
+      ],
+      [
+        0,
+        12,
+        30
+      ]
+    ]
+  }
+}

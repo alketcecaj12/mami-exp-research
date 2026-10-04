@@ -1,0 +1,8 @@
+services:
+  experiment:
+    build: .
+    volumes:
+      - ./data:/app/data:ro
+      - ./outputs:/app/outputs
+      - ./configs:/app/configs:ro
+    command: baseline

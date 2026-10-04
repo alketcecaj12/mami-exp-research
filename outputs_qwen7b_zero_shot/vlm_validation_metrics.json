@@ -1,0 +1,29 @@
+{
+  "zero_shot_multimodal": {
+    "n": 8,
+    "valid_responses": 0,
+    "invalid_responses": 8,
+    "accuracy_all": 0.0,
+    "macro_f1_all": 0.0,
+    "misogyny_precision": 0.0,
+    "misogyny_recall": 0.0,
+    "cohen_kappa_valid_only": null,
+    "confusion_matrix_labels_minus1_0_1": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        3,
+        0,
+        0
+      ],
+      [
+        5,
+        0,
+        0
+      ]
+    ]
+  }
+}

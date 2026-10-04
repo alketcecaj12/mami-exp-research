@@ -1,0 +1,32 @@
+{
+  "train": {
+    "metadata_rows": 9000,
+    "removed_test_overlap": 4,
+    "missing_images": 7598,
+    "available_rows": 1398,
+    "class_counts": {
+      "0": 719,
+      "1": 679
+    }
+  },
+  "validation": {
+    "metadata_rows": 1000,
+    "removed_test_overlap": 1,
+    "missing_images": 848,
+    "available_rows": 151,
+    "class_counts": {
+      "0": 77,
+      "1": 74
+    }
+  },
+  "test": {
+    "metadata_rows": 1000,
+    "removed_test_overlap": 0,
+    "missing_images": 614,
+    "available_rows": 386,
+    "class_counts": {
+      "0": 236,
+      "1": 150
+    }
+  }
+}
