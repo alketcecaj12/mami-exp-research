@@ -1,0 +1,21 @@
+data:
+  root: /Users/alket/Downloads/MAMI_2022_images
+  train: train.tsv
+  validation: validation.tsv
+  test: test.tsv
+  missing_images: error
+  image_dirs:
+    train: training_images
+    validation: training_images
+    test: test_images
+model:
+  id: HuggingFaceTB/SmolVLM2-2.2B-Instruct
+  revision: main
+  local_dir: models/smolvlm2-2.2b
+  device: auto
+  dtype: float32
+  longest_edge: 1024
+  max_new_tokens: 16
+experiment:
+  seed: 42
+  output: outputs_smolvlm2

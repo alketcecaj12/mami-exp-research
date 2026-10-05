@@ -1,0 +1,20 @@
+data:
+  root: /Users/alket/Downloads/MAMI_2022_images
+  train: train.tsv
+  validation: validation.tsv
+  test: test.tsv
+  missing_images: error
+  image_dirs:
+    train: training_images
+    validation: training_images
+    test: test_images
+model:
+  id: llava-hf/llava-1.5-7b-hf
+  revision: main
+  local_dir: models/llava-1.5-7b
+  device: auto
+  dtype: float16
+  max_new_tokens: 16
+experiment:
+  seed: 42
+  output: outputs_llava

@@ -10,7 +10,10 @@ LABELS = {0: "NOT_MISOGYNOUS", 1: "MISOGYNOUS"}
 
 
 def parse_label(response):
-    return {value: key for key, value in LABELS.items()}.get(response.strip())
+    response = response.strip()
+    if response == r"NOT\_MISOGYNOUS":
+        response = "NOT_MISOGYNOUS"
+    return {value: key for key, value in LABELS.items()}.get(response)
 
 
 class Classifier:
