@@ -1,0 +1,12 @@
+torch
+torchvision
+transformers
+sentence-transformers
+huggingface-hub
+accelerate
+sentencepiece
+numpy
+pandas
+scikit-learn
+Pillow
+PyYAML
