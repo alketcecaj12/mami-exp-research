@@ -1,0 +1,15 @@
+{
+  "threshold": 0.5,
+  "n": 999,
+  "true_negatives": 445,
+  "false_positives": 54,
+  "false_negatives": 77,
+  "true_positives": 423,
+  "precision": 0.8867924528301887,
+  "recall": 0.846,
+  "false_positive_rate": 0.10821643286573146,
+  "accuracy": 0.8688688688688688,
+  "macro_f1": 0.8688052434194105,
+  "note": "Candidate scoring is different from greedy label generation. No threshold has been selected.",
+  "smoke_test": false
+}
