@@ -1,18 +1,22 @@
 """Minimal batch-size-one LoRA training; loss is only on the answer tokens."""
 from pathlib import Path
 from PIL import Image
-from .vlm import Classifier, LABELS
+from .vlm import LABELS
 
 
 def train_lora(config, frame, resume=None):
     import torch
     from peft import LoraConfig, get_peft_model, get_peft_model_state_dict, set_peft_model_state_dict
+    if config["model"].get("family") == "gemma3":
+        from .gemma3 import Classifier
+    else:
+        from .vlm import Classifier
     classifier = Classifier(config, training=True)
     cfg = config["training"]
     torch.manual_seed(config["experiment"]["seed"])
     # Target language attention only; keep the vision encoder frozen.
     targets = [name for name, module in classifier.model.named_modules()
-               if "visual" not in name and name.split(".")[-1] in {"q_proj", "k_proj", "v_proj", "o_proj"}
+               if "vision_tower" not in name and "visual" not in name and name.split(".")[-1] in {"q_proj", "k_proj", "v_proj", "o_proj"}
                and isinstance(module, torch.nn.Linear)]
     if not targets:
         raise ValueError("No language attention modules found")
