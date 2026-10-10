@@ -39,7 +39,10 @@ def main():
     if args.command == "predict":
         if not args.image:
             parser.error("predict requires --image")
-        from .vlm import Classifier
+        if cfg["model"].get("family") == "gemma3":
+            from .gemma3 import Classifier
+        else:
+            from .vlm import Classifier
         print(json.dumps(Classifier(cfg, args.adapter).predict(args.image, args.text, args.mode), indent=2))
         return
     splits, report = load_splits(cfg)
@@ -63,7 +66,10 @@ def main():
         systems = fit_baselines(splits["train"], cfg["experiment"]["seed"])
         results = {name: model.predict(frame.text).tolist() for name, model in systems.items()}
     else:
-        from .vlm import Classifier
+        if cfg["model"].get("family") == "gemma3":
+            from .gemma3 import Classifier
+        else:
+            from .vlm import Classifier
         model = Classifier(cfg, args.adapter)
         rows = []
         for i, row in enumerate(frame.itertuples()):
