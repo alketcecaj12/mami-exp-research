@@ -1,9 +1,13 @@
 data:
-  root: data/MAMI
+  root: /Users/alket/Downloads/MAMI_2022_images
   train: train.tsv
   validation: validation.tsv
   test: test.tsv
-  missing_images: skip
+  missing_images: error
+  image_dirs:
+    train: training_images
+    validation: training_images
+    test: test_images
 model:
   family: gemma3
   id: google/gemma-3-4b-it
