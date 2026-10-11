@@ -1,0 +1,1 @@
+Run clustering with `python -m mami.clustering.cluster_memes --config configs/full_corrected.yaml --output outputs_clustering --limit 100 --k 10` after installing the clustering dependencies. The implementation preserves the original EmbeddingGemma image/multimodal comparison, KMeans metrics, and human-review atlases. Labels are excluded from embeddings and clustering.
