@@ -1,0 +1,47 @@
+{
+  "test": {
+    "metadata_rows": 1000,
+    "available_rows": 1000,
+    "missing_images": 0,
+    "removed_content_overlap": 0,
+    "excluded_examples": [],
+    "class_counts": {
+      "0": 500,
+      "1": 500
+    }
+  },
+  "validation": {
+    "metadata_rows": 1000,
+    "available_rows": 999,
+    "missing_images": 0,
+    "removed_content_overlap": 1,
+    "excluded_examples": [
+      {
+        "file_name": "15001.jpg",
+        "retained_split": "test",
+        "retained_image": "/Users/alket/Downloads/MAMI_2022_images/test_images/15001.jpg"
+      }
+    ],
+    "class_counts": {
+      "1": 500,
+      "0": 499
+    }
+  },
+  "train": {
+    "metadata_rows": 9000,
+    "available_rows": 8999,
+    "missing_images": 0,
+    "removed_content_overlap": 1,
+    "excluded_examples": [
+      {
+        "file_name": "15002.jpg",
+        "retained_split": "test",
+        "retained_image": "/Users/alket/Downloads/MAMI_2022_images/test_images/15002.jpg"
+      }
+    ],
+    "class_counts": {
+      "1": 4500,
+      "0": 4499
+    }
+  }
+}
