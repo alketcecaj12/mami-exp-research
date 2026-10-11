@@ -4,9 +4,9 @@
 def model_class(config):
     family = config["model"].get("family", "qwen2_5_vl")
     if family == "gemma3":
-        from ..gemma3 import Classifier
+        from .gemma3 import Classifier
     elif family in ("qwen2_5_vl", "qwen2vl", "qwen"):
-        from ..vlm import Classifier
+        from .qwen import Classifier
     else:
         raise ValueError(f"Unsupported model family: {family!r}")
     return Classifier
