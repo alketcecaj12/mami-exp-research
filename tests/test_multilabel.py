@@ -21,3 +21,14 @@ def test_multilabel_metrics_and_invalid():
     assert report["invalid_responses"] == 1
     assert report["exact_match_accuracy_all"] == 0.5
     assert report["hamming_loss_all"] == 0.5
+
+
+def test_fenced_json_and_reject_extraneous_text():
+    raw = '{"shaming":1,"stereotype":0,"objectification":1,"violence":0}'
+    expected = {"shaming": 1, "stereotype": 0, "objectification": 1, "violence": 0}
+    assert parse_response(raw) == expected
+    assert parse_response("""" + "```json\n" + raw + "\n```" + """") == expected
+    assert parse_response("""" + "```\n" + raw + "\n```" + """") == expected
+    assert parse_response("Here is JSON:\n" + raw) is None
+    assert parse_response("""" + "```json\n" + raw + "\n``` extra" + """") is None
+    assert parse_response('{"shaming":true,"stereotype":0,"objectification":1,"violence":0}') is None
