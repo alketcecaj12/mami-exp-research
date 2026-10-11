@@ -1,0 +1,1 @@
+Clustering uses the existing dataset configuration, e.g. `--config configs/full_corrected.yaml`. Keep dataset paths consistent with the source experiment. Run with `python -m mami.clustering.cluster_memes --output outputs_clustering --config configs/full_corrected.yaml` after adding the original addon script to this package.
