@@ -1,4 +1,4 @@
-# Environments
+# Local Python environments and caches
 .venv*/
 venv/
 __pycache__/
@@ -7,17 +7,25 @@ __pycache__/
 .ipynb_checkpoints/
 .DS_Store
 
-# Data and models
-data/
-models/
-outputs/
+# Local datasets and downloaded model weights (repository root only)
+/data/
+/models/
 
-# Model artefacts (inside any outputs_* folder)
+# Generated experiment results (repository root only)
+/outputs/
+/outputs_*/
+
+# Temporary local migration backups
+*.backup
+
+# Large generated model and embedding artifacts anywhere
 *.pt
 *.pth
 *.safetensors
 *.npy
 *.npz
 *.bin
-# Dataset-derived images (MAMI licence: no redistribution)
-thumbnails/
+
+# Archived legacy implementations and local backups
+/add-ons/
+/code_backup_20261003_151429_218895/

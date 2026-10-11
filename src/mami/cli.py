@@ -14,7 +14,7 @@ def write_json(path, value):
 
 def main():
     parser = argparse.ArgumentParser(description="Simple MAMI research commands")
-    parser.add_argument("command", choices=["inspect", "download", "baseline", "predict", "vlm", "train"])
+    parser.add_argument("command", choices=["inspect", "download", "baseline", "predict", "vlm", "train", "multilabel"])
     parser.add_argument("--config", default="configs/default.yaml")
     parser.add_argument("--split", choices=["validation", "test"], default="validation")
     parser.add_argument("--limit", type=int, help="Smoke test only; omit for a complete run")
@@ -39,7 +39,10 @@ def main():
     if args.command == "predict":
         if not args.image:
             parser.error("predict requires --image")
-        from .vlm import Classifier
+        if cfg["model"].get("family") == "gemma3":
+            from .gemma3 import Classifier
+        else:
+            from .vlm import Classifier
         print(json.dumps(Classifier(cfg, args.adapter).predict(args.image, args.text, args.mode), indent=2))
         return
     splits, report = load_splits(cfg)
@@ -58,12 +61,47 @@ def main():
     frame = splits[args.split]
     if args.limit:
         frame = frame.head(args.limit)
+    if args.command == "multilabel":
+        from .multilabel.prompts import LABELS
+        from .multilabel.inference import load_classifier
+        from .multilabel.evaluation import evaluate as evaluate_multilabel
+        missing = set(LABELS) - set(frame.columns)
+        if missing:
+            raise ValueError(f"Missing Task B annotation columns: {sorted(missing)}")
+        for label in LABELS:
+            frame[label] = pd.to_numeric(frame[label], errors="raise")
+            if not frame[label].isin([0, 1]).all():
+                raise ValueError(f"Invalid Task B values in {label}")
+        model = load_classifier(cfg, args.adapter)
+        rows, predictions = [], []
+        prefix = ("lora" if args.adapter else "zero_shot") + "_" + args.mode
+        for i, row in enumerate(frame.itertuples()):
+            result = model.predict(row.image_path, row.text, args.mode)
+            predictions.append(result["prediction"])
+            record = {"file_name": row.file_name, "label": row.label}
+            for label in LABELS:
+                record["true_" + label] = getattr(row, label)
+                record["pred_" + label] = result["prediction"][label] if result["prediction"] is not None else None
+            record["valid"] = result["prediction"] is not None
+            record["response"] = result["response"]
+            rows.append(record)
+            pd.DataFrame(rows).to_csv(out / f"multilabel_{prefix}_{args.split}_raw.csv", index=False)
+            print(f"{i + 1}/{len(frame)} {row.file_name}: {result['response']}", flush=True)
+        summary = evaluate_multilabel(frame, predictions)
+        write_json(out / f"multilabel_{prefix}_{args.split}_metrics.json", summary)
+        write_json(out / f"multilabel_{prefix}_{args.split}_config.json",
+                   {"config": cfg, "mode": args.mode, "adapter": args.adapter, "limit": args.limit})
+        print(json.dumps(summary, indent=2))
+        return
     if args.command == "baseline":
         from .baseline import fit_baselines
         systems = fit_baselines(splits["train"], cfg["experiment"]["seed"])
         results = {name: model.predict(frame.text).tolist() for name, model in systems.items()}
     else:
-        from .vlm import Classifier
+        if cfg["model"].get("family") == "gemma3":
+            from .gemma3 import Classifier
+        else:
+            from .vlm import Classifier
         model = Classifier(cfg, args.adapter)
         rows = []
         for i, row in enumerate(frame.itertuples()):

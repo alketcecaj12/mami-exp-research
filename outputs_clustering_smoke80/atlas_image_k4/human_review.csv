@@ -1,5 +1,0 @@
-cluster,n,theme,visual_motifs,template_or_watermark_effect,interpretation,counterexamples,confidence,reviewer,typical_ids,peripheral_ids
-0,28,,,,,,,,train:10805.jpg;train:2703.jpg;train:8009.jpg;train:11155.jpg;train:11400.jpg,train:8242.jpg;train:2343.jpg;train:4329.jpg
-1,20,,,,,,,,train:9299.jpg;train:7174.jpg;train:7984.jpg;train:9761.jpg;train:3359.jpg,train:10945.jpg;train:4598.jpg;validation:6406.jpg
-2,17,,,,,,,,train:724.jpg;train:4202.jpg;train:10010.jpg;train:5199.jpg;train:7669.jpg,train:1662.jpg;train:10037.jpg;train:744.jpg
-3,15,,,,,,,,train:8492.jpg;test:16198.jpg;train:9268.jpg;train:10465.jpg;validation:6225.jpg,train:6961.jpg;test:17054.jpg;train:709.jpg

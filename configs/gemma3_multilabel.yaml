@@ -1,0 +1,28 @@
+data:
+  root: /Users/alket/Downloads/MAMI_2022_images
+  train: train.tsv
+  validation: validation.tsv
+  test: test.tsv
+  missing_images: error
+  image_dirs:
+    train: training_images
+    validation: training_images
+    test: test_images
+model:
+  family: gemma3
+  id: google/gemma-3-4b-it
+  revision: main
+  local_dir: models/gemma-3-4b-it
+  device: auto
+  dtype: float32
+  max_new_tokens: 16
+experiment:
+  seed: 42
+  output: outputs_multilabel_gemma3
+training:
+  epochs: 1
+  learning_rate: 0.0001
+  accumulation_steps: 8
+  rank: 8
+  alpha: 16
+  dtype: float32
