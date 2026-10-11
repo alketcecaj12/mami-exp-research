@@ -1,7 +1,21 @@
-.venv/
+# Environments
+.venv*/
+venv/
 __pycache__/
 *.egg-info/
 .pytest_cache/
+.ipynb_checkpoints/
+.DS_Store
+
+# Data and models
 data/
 models/
 outputs/
+
+# Model artefacts (inside any outputs_* folder)
+*.pt
+*.pth
+*.safetensors
+*.npy
+*.npz
+*.bin
