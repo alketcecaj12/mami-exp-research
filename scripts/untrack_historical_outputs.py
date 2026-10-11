@@ -24,7 +24,7 @@ def main():
         raise SystemExit(f"Expected {BRANCH}, found {branch!r}")
     if git("status", "--porcelain", "--untracked-files=no"):
         raise SystemExit("Tracked working-tree changes detected. Commit/stash first.")
-    subprocess.run(["git", "fetch", "origin", "archive/pre-root-cleanup-20261011"], check=True)
+    subprocess.run(["git", "fetch", "origin"], check=True)
     if not git("rev-parse", "--verify", ARCHIVE):
         raise SystemExit("Archive branch not available; refusing to proceed.")
     paths = git("ls-files", "-z").split("\0")
