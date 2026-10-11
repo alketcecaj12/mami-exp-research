@@ -1,0 +1,11 @@
+cluster,n,theme,visual_motifs,template_or_watermark_effect,interpretation,counterexamples,confidence,reviewer,typical_ids,peripheral_ids
+0,1227,,,,,,,,train:11164.jpg;train:4924.jpg;train:528.jpg;validation:5471.jpg;train:5082.jpg,train:8449.jpg;train:817.jpg;train:4547.jpg
+1,1358,,,,,,,,train:6820.jpg;validation:4283.jpg;test:15686.jpg;validation:10837.jpg;train:10582.jpg,train:4323.jpg;train:4985.jpg;test:17028.jpg
+2,1212,,,,,,,,train:11346.jpg;train:10493.jpg;test:16114.jpg;train:58.jpg;train:11242.jpg,train:6711.jpg;train:10116.jpg;train:13189.jpg
+3,1364,,,,,,,,train:3933.jpg;train:1759.jpg;train:6723.jpg;train:8647.jpg;train:10340.jpg,train:8236.jpg;train:4346.jpg;train:5032.jpg
+4,918,,,,,,,,train:10118.jpg;train:3542.jpg;train:6813.jpg;train:2134.jpg;train:8620.jpg,train:428.jpg;train:2544.jpg;train:10435.jpg
+5,851,,,,,,,,train:2294.jpg;train:946.jpg;train:7878.jpg;train:5927.jpg;train:5678.jpg,validation:3750.jpg;validation:10305.jpg;train:10384.jpg
+6,103,,,,,,,,train:10263.jpg;train:293.jpg;train:3064.jpg;train:8059.jpg;train:11660.jpg,train:6649.jpg;train:4793.jpg;test:15169.jpg
+7,1056,,,,,,,,train:7020.jpg;test:15644.jpg;train:10859.jpg;test:15607.jpg;train:7771.jpg,train:6243.jpg;train:744.jpg;train:1269.jpg
+8,1401,,,,,,,,validation:6424.jpg;train:4732.jpg;train:62.jpg;train:8519.jpg;train:11571.jpg,train:5231.jpg;train:837.jpg;train:4392.jpg
+9,1508,,,,,,,,train:11165.jpg;train:5937.jpg;train:251.jpg;validation:5279.jpg;train:2599.jpg,validation:132.jpg;validation:6170.jpg;validation:4602.jpg
