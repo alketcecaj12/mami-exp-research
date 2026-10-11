@@ -1,14 +1,12 @@
 """Independent Task B inference; reuses model loading, not binary predictions."""
 from PIL import Image
+from ..models.registry import model_class
 from .prompts import PROMPT
 from .parsing import parse_response
 
 
 def load_classifier(config, adapter=None):
-    if config["model"].get("family") == "gemma3":
-        from ..gemma3 import Classifier as BaseClassifier
-    else:
-        from ..vlm import Classifier as BaseClassifier
+    BaseClassifier = model_class(config)
 
     class MultilabelClassifier(BaseClassifier):
         def messages(self, image, text, mode="multimodal"):
