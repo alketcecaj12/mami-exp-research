@@ -11,6 +11,7 @@ PAIRS = [
     ("configs/qwen_multilabel.yaml", "configs/multilabel/qwen.yaml"),
     ("configs/qwen7b.yaml", "configs/binary/qwen7b.yaml"),
     ("configs/full_corrected.yaml", "configs/binary/qwen3b.yaml"),
+    ("configs/full_corrected.yaml", "configs/clustering/dataset.yaml"),
 ]
 
 @pytest.mark.parametrize("old,new", PAIRS)
