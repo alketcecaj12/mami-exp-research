@@ -1,9 +1,6 @@
-"""Binary inference entry point, preserving existing model adapters."""
+"""Binary Task A inference; model loading is shared across tasks."""
+from ..models.registry import load_model
 
 
 def load_classifier(config, adapter=None, training=False):
-    if config["model"].get("family") == "gemma3":
-        from ..gemma3 import Classifier
-    else:
-        from ..vlm import Classifier
-    return Classifier(config, adapter=adapter, training=training)
+    return load_model(config, adapter=adapter, training=training)
