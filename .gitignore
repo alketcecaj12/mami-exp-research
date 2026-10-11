@@ -25,3 +25,7 @@ __pycache__/
 *.npy
 *.npz
 *.bin
+
+# Archived legacy implementations and local backups
+/add-ons/
+/code_backup_20261003_151429_218895/
