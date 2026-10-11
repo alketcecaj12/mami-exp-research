@@ -8,6 +8,12 @@ The corrected full-data experiment trained on **8,999 memes**, evaluated on **99
 
 This is an independent methodological pilot relevant to research on online visual misogyny. It is not an official FEMVision result or a deployment-ready moderation system.
 
+## Active branch and archived artifacts
+
+The active cleanup branch tracks research source code, configuration, tests and documentation, **not** historical generated `outputs_*/` directories or legacy add-on installers. All previously tracked results and add-ons are preserved in Git branch `archive/pre-root-cleanup-20261011`. Existing local copies may remain on disk and are ignored by Git. See [architecture and archive recovery](docs/architecture.md) and [migrated LLaVA, SmolVLM and threshold runners](docs/migrated-runners.md).
+
+The migrated command-line entry points and unit tests have been checked locally; full inference and training were not rerun as part of repository cleanup. Historical metrics below refer to the original experiment, not a newly reproduced run.
+
 ## Repository architecture and newer workflows (October 2026)
 
 The historical report below describes the corrected **binary Task A** pilot; it should not be read as a Task B or clustering evaluation. The codebase now also includes independent multilabel Task B and exploratory clustering workflows. See [architecture and compatibility](docs/architecture.md) for module boundaries and [clustering configuration](configs/clustering/README.md) for the clustering CLI.
